@@ -87,6 +87,46 @@ func setOfWords(string: String, language: inout String?) -> Set<String> {
     return wordSet
 }
 
+extension String {
+    func subString(from: Int, to: Int) -> String {
+        let startIndex = self.index(self.startIndex, offsetBy: from)
+        let endIndex = self.index(self.startIndex, offsetBy: to)
+        return String(self[startIndex...endIndex])
+    }
+    
+    func isPalindrome() -> Bool {
+        return self == self.reverse()
+    }
+    
+    func reverse() -> String {
+        let reversed = String(self.reversed())
+        return reversed
+    }
+    
+    func allSubstrings() -> [String] {
+        var substrings = [String]()
+        for i in 0..<self.count {
+            for j in i..<self.count {
+                substrings.append(self.subString(from: i, to: j))
+            }
+        }
+        return substrings
+    }
+}
+
+func countAllPalindromicSubstrings(s:String) -> Int {
+    var count = 0
+    let substrings = s.allSubstrings()
+    for string in substrings {
+        if string.isPalindrome() {
+            count += 1
+        }
+    }
+    return count
+}
+
+
+
 
 
 
